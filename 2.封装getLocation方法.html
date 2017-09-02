@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function getLocation(){
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition,showError);
+			} else {
+				alert('浏览器不支持定位');
+			}
+		}
+
+		getLocation();
+		//定位成功返回定位信息
+		function showPosition(position){
+			console.log(position);
+			let lat = position.coords.latitude;
+			var log = position.coords.longitude;
+			alert('经度：'+ lat +'纬度：' + log);
+		}
+		//定位失败，获取错误信息
+		function showError(err){
+			// console.log(err);
+			switch(err.code) {
+				case err.PERMISSION_DENIED:
+					alert('定位失败，用户拒绝请求地理定位');
+					break;
+				case err.POSITION_UNAVAILABLE:
+					alert('定位失败，位置信息不可用');
+					break;
+				case err.TIMEOUT:
+					alert('定位失败，请求用户位置超时');
+					break;
+				default:
+					alert('定位失败，位置错误');
+					break;
+			}
+		}
+	</script>
+</body>
+</html>
